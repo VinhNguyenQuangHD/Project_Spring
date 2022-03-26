@@ -16,6 +16,20 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @GetMapping("/home")
+    public String show_home_page(){
+        return "homepage";
+    }
+
+    @GetMapping("/login")
+    public String show_login(){
+        return "login";
+    }
+    @PostMapping("/login-progress")
+    public String login_process(){
+        return "redirect:/home";
+    }
+
     @GetMapping("/add")
     public String show_list(Model model){
         List<User> list = service.listAll();
