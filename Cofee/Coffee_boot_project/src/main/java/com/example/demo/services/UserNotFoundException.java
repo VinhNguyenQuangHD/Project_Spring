@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.services;
 
 public class UserNotFoundException extends Throwable {
 

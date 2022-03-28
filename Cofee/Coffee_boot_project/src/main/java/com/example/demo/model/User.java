@@ -1,6 +1,7 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -15,16 +16,30 @@ public class User {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(nullable = false,  length = 25)
+    @Column(nullable = false)
     private String password;
 
-    private boolean enable;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Roles> roles;
 
-    public boolean isEnable() {
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+
+    @Column(nullable = false)
+    private String enable;
+
+
+    public String getEnable() {
         return enable;
     }
 
-    public void setEnable(boolean enable) {
+    public void setEnable(String enable) {
         this.enable = enable;
     }
 

@@ -73,16 +73,16 @@
                 <div class="col-lg-7 text-center py-5">
                     <h1 class="animate__animated animate__heartBeat">Welcome</h1>
 
-                    <form>
+                    <form th:action = "@{/login}" method="POST" >
                         <div class="form-row py-3 pt-5">
                             <div class="offset-1 col-lg-10">
-                                <input type="text" class="inp px-3" placeholder="Username">
+                                <input type="text" class="inp px-3" placeholder="Email" name="email">
                             </div>
                         </div>
 
                         <div class="form-row py-3">
                             <div class="offset-1 col-lg-10">
-                                <input type="password" class="inp px-3" placeholder="Password">
+                                <input type="password" class="inp px-3" placeholder="Password" name="password">
                             </div>
                         </div>
 
@@ -92,6 +92,7 @@
                             </div>
                         </div>
                     </form>
+                    <a th:href="@{/register}">Don't have any account, click here to sign up</a>
                     <p>Or login with</p>
                     <span><i class="fab fa-facebook"></i></span>
                     <span><i class="fab fa-google-plus"></i></span>
