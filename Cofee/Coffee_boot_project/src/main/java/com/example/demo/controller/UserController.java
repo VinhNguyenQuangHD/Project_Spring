@@ -1,20 +1,19 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
-import com.example.demo.services.UserServiceImp;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private UserServiceImp userServiceImp;
+    private UserRepository userRepository;
 
     @GetMapping("/home")
     public ModelAndView show_home_page(){
@@ -41,21 +40,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ModelAndView Save_infor(User user, RedirectAttributes re_atr){
-        ModelAndView model = new ModelAndView();
-        if(userServiceImp.isUserAlreadyExists(user)){
-            re_atr.addFlashAttribute("alert","User already exists !!!");
-        }else{
-            userServiceImp.saveUser(user);
+    public String Save_infor(User user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode_pass = encoder.encode(user.getPassword());
+        user.setPassword(encode_pass);
+        userRepository.save(user);
 
-        }
-        model.addObject("register",new User());
-        model.setViewName("register");
-        return model;
+        return "redirect:/login";
     }
 
-    @PostMapping("/login-progress")
-    public String login_process(){
-        return "redirect:/home";
-    }
 }

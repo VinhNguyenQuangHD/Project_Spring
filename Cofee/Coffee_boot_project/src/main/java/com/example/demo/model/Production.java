@@ -10,6 +10,9 @@ public class Production {
     private Integer id;
 
     @Column(nullable = false, length = 50)
+    private String product_id;
+
+    @Column(nullable = false, length = 50)
     private String product_name;
 
     @Column(nullable = false, length = 10)
