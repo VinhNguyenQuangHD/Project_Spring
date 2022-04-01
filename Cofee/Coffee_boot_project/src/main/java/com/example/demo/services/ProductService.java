@@ -3,39 +3,40 @@ package com.example.demo.services;
 import com.example.demo.model.Production;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.*;
 
+
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductService {
+
     @Autowired
-    private ProductRepository repository;
+    private ProductRepository productRepository;
 
-    public List<Production> listAll(){
-        return (List<Production>) repository.findAll();
+
+    public List<Production> listAll() {
+        return (List<Production>) productRepository.findAll();
     }
 
-    public void save(Production product) {
-        repository.save(product);
+    public void save(Production production) {
+        productRepository.save(production);
     }
 
-    public Production get(Integer id) throws UserNotFoundException {
-        Optional<Production> ids = repository.findById(id);
-        if(ids.isPresent()){
-            return ids.get();
-        }throw new UserNotFoundException("Couldn't find any user !!!");
-    }
-
-    public void delete(Integer id) throws UserNotFoundException {
-        Long count = repository.countById(id);
-        if(count == 0 || count == null){
-            throw new UserNotFoundException("Couldn't find any user !!!");
+    public Production findProductionId(Integer id) throws UserNotFoundException {
+        Optional<Production> production = productRepository.findById(id);
+        if(production.isPresent()){
+            return production.get();
         }
-        repository.deleteById(id);
+        throw new UserNotFoundException("User not found !!!");
+    }
+
+    public void delete(Integer id) {
+        productRepository.deleteById(id);
     }
 }
