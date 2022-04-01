@@ -21,6 +21,14 @@ public class Production {
     @Column(nullable = false, length = 10)
     private Integer product_price;
 
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
+
     public Integer getId() {
         return id;
     }

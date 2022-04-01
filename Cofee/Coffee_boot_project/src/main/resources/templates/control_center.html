@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Control center</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h1>Welcome</h1>
+    <a class = "h3" th:href="@{/add/plus}">To add page</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Image</th>
+            <th>Id product</th>
+            <th>Product name</th>
+            <th>Product type</th>
+            <th>Product price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            <th:block th:each="prod : ${list_production}">
+                <tr>
+                    <td>[[${prod.id}]]</td>
+                    <td><img src="[[${prod.product_image}]]"></td>
+                    <td>[[${prod.product_id}]]</td>
+                    <td>[[${prod.product_name}]]</td>
+                    <td>[[${prod.product_type}]]</td>
+                    <td>[[${prod.product_price}]]</td>
+                    <td><a th:href="@{'/add/edit/'+ ${prod.id}}">Update</a></td>
+                    <td><a th:href="@{'/add/delete/'+ ${prod.id}}">Delete</a></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

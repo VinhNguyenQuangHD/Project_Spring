@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.model.Production;
 import com.example.demo.model.User;
+import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class UserRepositoryTest {
     @Autowired
     private UserRepository repo;
+
+    @Autowired
+    private ProductRepository pro_repo;
 
     @Test
     public void testAddNew(){
@@ -72,5 +78,15 @@ public class UserRepositoryTest {
 
         Optional<User> optimizeUser = repo.findById(userId);
         Assertions.assertThat(optimizeUser).isNotPresent();
+    }
+
+    @Test
+    public void testProduceAll(){
+        Iterable<Production> pro = pro_repo.findAll();
+        Assertions.assertThat(pro).hasSizeGreaterThan(0);
+
+        for(Production production : pro){
+            System.out.println(production);
+        }
     }
 }
