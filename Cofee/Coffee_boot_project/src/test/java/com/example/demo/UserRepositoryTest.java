@@ -9,10 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -23,6 +27,10 @@ public class UserRepositoryTest {
 
     @Autowired
     private ProductRepository pro_repo;
+
+
+    @Autowired
+    private TestEntityManager testEntityManager;
 
     @Test
     public void testAddNew(){
@@ -89,4 +97,5 @@ public class UserRepositoryTest {
             System.out.println(production);
         }
     }
+
 }

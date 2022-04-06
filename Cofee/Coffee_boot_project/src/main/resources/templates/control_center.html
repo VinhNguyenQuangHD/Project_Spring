@@ -12,25 +12,40 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <th>ID</th>
-            <th>Image</th>
-            <th>Id product</th>
+            <th>Product image</th>
             <th>Product name</th>
             <th>Product type</th>
             <th>Product price</th>
-            <th>Update</th>
             <th>Delete</th>
         </thead>
         <tbody>
             <th:block th:each="prod : ${list_production}">
                 <tr>
                     <td>[[${prod.id}]]</td>
-                    <td><img src="[[${prod.product_image}]]"></td>
-                    <td>[[${prod.product_id}]]</td>
-                    <td>[[${prod.product_name}]]</td>
+                    <td scope="row"> <img th:src="*{'data:image/png image/jepg image/jpg;base64,'+prod.product_image }" style="width: 100px;height: 100px;"></td>
+                    <td>[[${prod.product_name}]]
+                        <a th:href="@{'/add/setting-name/'+ ${prod.id}}">Sửa đổi tên</a>
+                    </td>
                     <td>[[${prod.product_type}]]</td>
                     <td>[[${prod.product_price}]]</td>
-                    <td><a th:href="@{'/add/edit/'+ ${prod.id}}">Update</a></td>
                     <td><a th:href="@{'/add/delete/'+ ${prod.id}}">Delete</a></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table >
+
+    <a class = "h3" th:href="@{/add-new-type}">To add new types</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Title</th>
+        </thead>
+        <tbody>
+            <th:block th:each="types : ${list_types}">
+                <tr>
+                    <td>[[${types.id}]]</td>
+                    <td>[[${types.title}]]</td>
                 </tr>
             </th:block>
         </tbody>

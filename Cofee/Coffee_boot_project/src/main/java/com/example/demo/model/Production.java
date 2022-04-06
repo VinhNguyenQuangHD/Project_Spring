@@ -9,8 +9,9 @@ public class Production {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 50)
-    private String product_id;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String product_image;
 
     @Column(nullable = false, length = 50)
     private String product_name;
@@ -20,14 +21,6 @@ public class Production {
 
     @Column(nullable = false, length = 10)
     private Integer product_price;
-
-    public String getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
-    }
 
     public Integer getId() {
         return id;
@@ -59,5 +52,13 @@ public class Production {
 
     public void setProduct_price(Integer product_price) {
         this.product_price = product_price;
+    }
+
+    public String getProduct_image() {
+        return product_image;
+    }
+
+    public void setProduct_image(String product_image) {
+        this.product_image = product_image;
     }
 }

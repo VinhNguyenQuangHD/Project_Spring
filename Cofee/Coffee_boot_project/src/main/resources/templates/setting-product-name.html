@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Setting product name</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h1> Sửa lại tên sản phẩm</h1>
+    <form action="@{/add/setting-name}" method="post" >
+        <input type="text" name="id" value="production.id">
+        <div class="form-group row" >
+            <label class="col-sm-4 col-form-label">Tên sản phẩm:</label>
+            <div class="col-sm-8 ">
+                <input type="text" name="product_name" class="form-control" required minlength="6" maxlength="20"/>
+            </div>
+        </div>
+
+        <div class="text-center " >
+            <button type="submit" class="btn btn-primary m-2">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-secondary m-2" onclick="cancelForm()">Hủy kết quả</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
