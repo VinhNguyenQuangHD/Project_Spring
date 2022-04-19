@@ -7,15 +7,19 @@
 </head>
 <body>
 <div class="container-fluid text-center">
+
     <h1>Welcome</h1>
     <a class = "h3" th:href="@{/add/plus}">To add page</a>
+    <a class="h3" th:href="@{/cart}">Cart</a>
+    <br>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <th>ID</th>
             <th>Product image</th>
             <th>Product name</th>
-            <th>Product type</th>
             <th>Product price</th>
+            <th>Detail</th>
+            <th>Edit</th>
             <th>Delete</th>
         </thead>
         <tbody>
@@ -23,12 +27,11 @@
                 <tr>
                     <td>[[${prod.id}]]</td>
                     <td scope="row"> <img th:src="*{'data:image/png image/jepg image/jpg;base64,'+prod.product_image }" style="width: 100px;height: 100px;"></td>
-                    <td>[[${prod.product_name}]]
-                        <a th:href="@{'/add/setting-name/'+ ${prod.id}}">Sửa đổi tên</a>
-                    </td>
-                    <td>[[${prod.product_type}]]</td>
+                    <td>[[${prod.product_name}]]</td>
                     <td>[[${prod.product_price}]]</td>
-                    <td><a th:href="@{'/add/delete/'+ ${prod.id}}">Delete</a></td>
+                    <td><a th:href="@{'/show-detail/'+ ${prod.id}}">Xem chi tiết</a></td>
+                    <td><a th:href="@{'/add/edit/'+ ${prod.id}}">Chỉnh sửa</a></td>
+                    <td><a th:href="@{'/add/delete/'+ ${prod.id}}">Xóa</a></td>
                 </tr>
             </th:block>
         </tbody>

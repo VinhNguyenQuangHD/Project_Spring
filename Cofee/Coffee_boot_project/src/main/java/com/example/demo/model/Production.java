@@ -16,8 +16,8 @@ public class Production {
     @Column(nullable = false, length = 50)
     private String product_name;
 
-    @Column(nullable = false, length = 10)
-    private String product_type;
+    @Column(nullable = false, length = 50)
+    private String types;
 
     @Column(nullable = false, length = 10)
     private Integer product_price;
@@ -38,12 +38,12 @@ public class Production {
         this.product_name = product_name;
     }
 
-    public String getProduct_type() {
-        return product_type;
+    public String getTypes() {
+        return types;
     }
 
-    public void setProduct_type(String product_type) {
-        this.product_type = product_type;
+    public void setTypes(String types) {
+        this.types = types;
     }
 
     public Integer getProduct_price() {

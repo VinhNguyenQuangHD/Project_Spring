@@ -1,14 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Production;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.services.ProductService;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -16,12 +21,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/home")
-    public ModelAndView show_home_page(){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("homepage");
+    @Autowired
+    private ProductService service;
 
-        return model;
+    @GetMapping("/home")
+    public String show_home_page(Model model){
+        List<Production> list = service.listAll();
+        model.addAttribute("list_production",list);
+        return "homepage";
     }
 
     @GetMapping("/login")

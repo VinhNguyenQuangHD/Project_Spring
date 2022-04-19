@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
 import com.example.demo.model.Production;
+import com.example.demo.model.Types;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.*;
@@ -16,18 +18,17 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
+
     @Autowired
     private ProductRepository productRepository;
 
 
     public List<Production> listAll() {
-        return productRepository.findAll();
+        return productRepository.findByList();
     }
 
-    public void save(Production production, MultipartFile file) {
 
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-            production.setProduct_image(Base64.getEncoder().encodeToString(filename.getBytes()));
+    public void save(Production production) {
             productRepository.save(production);
     }
 
@@ -53,7 +54,7 @@ public class ProductService {
         else{
             production.setProduct_image(Base64.getEncoder().encodeToString(file.getBytes()));
             production.setProduct_name(product_name);
-            production.setProduct_type(product_type);
+            production.setTypes(product_type);
             production.setProduct_price(Integer.valueOf(product_price));
 
             productRepository.save(production);

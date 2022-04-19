@@ -39,16 +39,11 @@ public class ProductController {
     }
 
     @GetMapping("/add/plus")
-    public String showAddForm(){
+    public String showAddForm(Model model){
+        List<Types> types_list = typesService.findAllTypes();
+        model.addAttribute("list_types",types_list);
         return "add_form";
     }
-
-    /*@PostMapping("/add/save")
-    public String saveUser(Production production, @RequestParam(value = "product_image") MultipartFile file,RedirectAttributes re_atr){
-        service.save(production,file);
-        re_atr.addFlashAttribute("message","User has been created !!!");
-        return "redirect:/add";
-    }*/
 
     @PostMapping("/add/save")
     public String addToData(@RequestParam(value = "product_image", required = false) MultipartFile files
@@ -65,19 +60,38 @@ public class ProductController {
         return "setting-product-name";
     }
 
+    @GetMapping("/show-detail/{id}")
+    public String showDetailProduction(@PathVariable("id") Integer id, Model model) throws UserNotFoundException {
+        Production production = service.findProductionId(id);
+        Types type = typesService.findByID(Integer.valueOf(production.getTypes()));
+        model.addAttribute("production",production);
+        model.addAttribute("id",production.getId());
+        model.addAttribute("type", type.getTitle());
+        model.addAttribute("price",production.getProduct_price());
+        model.addAttribute("name", production.getProduct_name());
+        model.addAttribute("image", production.getProduct_image());
+
+        return "production_detail";
+    }
+
     @PostMapping("/add/setting-name")
     public String gotProductSettingName(@PathVariable("id") Integer id, @RequestParam(value = "product_name", required = false) String name){
         service.changeProductName(id,name);
         return "redirect:/add";
     }
 
-    /*@GetMapping("/add/edit/{id}")
+    @GetMapping("/add/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes re_atr) throws UserNotFoundException {
         Production production = service.findProductionId(id);
         model.addAttribute("production",production);
-        model.addAttribute("title","Edit production "+id+"");
-        return "add_form";
-    }*/
+        return "edit_form";
+    }
+
+    @PostMapping("/add/save-edit")
+    public String saveEdit(Production production){
+        service.save(production);
+        return "redirect:/add";
+    }
 
    @GetMapping("/add/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, RedirectAttributes re_atr){

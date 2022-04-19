@@ -17,7 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -54,8 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/home").authenticated()
                 .antMatchers("/").authenticated()
+                .antMatchers("/review").authenticated()
+                .antMatchers("/add").authenticated()
+                .antMatchers("/cart").authenticated()
                 .anyRequest().permitAll()
                 .and().formLogin().loginPage("/login")
+                .failureUrl("/login-enable=false")
                 .usernameParameter("username")
                 .defaultSuccessUrl("/home")
                 .permitAll()
