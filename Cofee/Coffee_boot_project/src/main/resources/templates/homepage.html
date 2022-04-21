@@ -127,8 +127,80 @@
         }
 
     </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+        *{
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        nav{
+            font-family: 'Montserrat', sans-serif;
+            background: #4abd3e;
+            height: 80px;
+            width: 100%;
+        }
+        label.logo{
+            color: white;
+            font-size: 30px;
+            line-height: 80px;
+            padding: 0 100px;
+            font-weight: bold;
+        }
+        nav ul{
+            float: right;
+            margin-right: 20px;
+
+        }
+        nav ul li{
+            display: inline-block;
+            line-height: 80px;
+            margin: 0 5px;
+        }
+        nav ul li a{
+            color: white;
+            font-size: 17px;
+            text-transform: uppercase;
+            padding: 7px 13px;
+            border-radius: 3px;
+        }
+        a.active, a:hover{
+            background: #72DDA2;
+            transition: .5s;
+            text-decoration: none;
+        }
+        .checkbtn{
+            font-size: 30px;
+            float: right;
+            line-height: 80px;
+            margin-right: 40px;
+            cursor: pointer;
+            display: none;
+        }
+        #check{
+            display: none;
+        }
+    </style>
 </head>
 <body>
+
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">CoffeeLogo</label>
+    <ul>
+        <li><a class="active" th:href="@{/home}">Trang chủ</a></li>
+        <li><a th:href="@{/show-cart}">Giỏ hàng</a></li>
+        <li><a href="#">Cá nhân</a></li>
+        <li><a href="#">Liên hệ</a></li>
+        <li><a href="#">Phản hồi</a></li>
+    </ul>
+</nav>
+
 <div class="wrapper">
     <div class="links">
         <ul>
@@ -150,6 +222,8 @@
                         <p class="title">[[${prod.product_name}]]</p>
                         <p class="content">[[${prod.product_price}]]</p>
                         <div class="btn"><a th:href="@{'/show-detail/'+ ${prod.id}}">Xem thêm</a></div>
+                        <br>
+                        <div class="btn"><a th:href="@{'/add-cart/'+ ${prod.id}}">Thêm vào giỏ</a></div>
                     </div>
                 </div>
             </th:block>
@@ -164,6 +238,8 @@
                         <p class="title">[[${prod.product_name}]]</p>
                         <p class="content">[[${prod.product_price}]]</p>
                         <div class="btn"><a th:href="@{'/show-detail/'+ ${prod.id}}">Xem thêm</a></div>
+                        <br>
+                        <div class="btn"><a th:href="@{'/add-cart/'+ ${prod.id}}">Thêm vào giỏ</a></div>
                     </div>
                 </div>
             </th:block>
