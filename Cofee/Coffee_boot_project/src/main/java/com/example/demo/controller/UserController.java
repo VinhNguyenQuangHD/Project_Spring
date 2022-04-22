@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import com.example.demo.services.ProductService;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +26,11 @@ public class UserController {
 
     @GetMapping("/home")
     public String show_home_page(Model model){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.findingUserByUsername(username);
         List<Production> list = service.listAll();
         model.addAttribute("list_production",list);
+        model.addAttribute("username",user);
         return "homepage";
     }
 

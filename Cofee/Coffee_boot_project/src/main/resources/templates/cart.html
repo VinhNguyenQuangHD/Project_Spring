@@ -209,7 +209,7 @@
                             <div class="product-info">
                                 <h3 class="product-name">Tên sản phẩm: [[${prod.production_name}]]</h3>
                                 <p class="product-quantity">Số lượng: <input type="number" th:value="${prod.production_count}" name="">
-                                <h4 class="product-price"> Tổng tiền:[[${prod.total}]]</h4>
+                                <h4 class="product-price"> Tổng tiền:[[${prod.total}]] <br> <a th:href="@{'/quick-bill/'+ ${prod.id}}">Mua nhanh</a></h4>
                                 <p class="product-remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <span class="remove"><a th:href="@{'/delete-cart/'+ ${prod.id}}" style="text-decoration: none; color: #fff;">Loại khỏi giỏ</a></span>
@@ -227,7 +227,7 @@
                 <span>Tổng số lượng sản phẩm:</span>
                 <span>[[${total_price}]]</span>
             </p>
-            <a href="#">Xuất hóa đơn</a>
+            <a th:href="@{'/full-bill'}">Xuất hóa đơn</a>
         </div>
     </div>
     </div>

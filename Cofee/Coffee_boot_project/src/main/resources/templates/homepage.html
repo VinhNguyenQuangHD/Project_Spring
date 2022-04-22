@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!--Navbar css -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
@@ -52,7 +55,9 @@
         }
 
         .view_item img{
-            width: 75px;
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
         }
 
         .view_main{
@@ -127,6 +132,7 @@
         }
 
     </style>
+    <!--Home css -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
         *{
@@ -183,6 +189,85 @@
             display: none;
         }
     </style>
+    <!--Footer css -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .containers{
+            max-width: 1170px;
+            margin: auto;
+        }
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        ul{
+            list-style: none;
+        }
+        .footer{
+            background-color: #24262b;
+            padding: 70px 0;
+        }
+        .footer-col{
+            width: 25%;
+            padding: 0 15px;
+
+        }
+        .footer-col h4{
+            font-size: 18px;
+            color: #fff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+        .footer-col ul li:not(:last-child){
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+            color: #fff;
+            padding-left: 10px;
+        }
+        .footer-col .social-link a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin: 0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-link a:hover{
+            color: #24262b;
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 
@@ -195,7 +280,7 @@
     <ul>
         <li><a class="active" th:href="@{/home}">Trang chủ</a></li>
         <li><a th:href="@{/show-cart}">Giỏ hàng</a></li>
-        <li><a href="#">Cá nhân</a></li>
+        <li><a th:href="@{'/show-profile/'+${username.id}}">[[${username.username}]]</a></li>
         <li><a href="#">Liên hệ</a></li>
         <li><a href="#">Phản hồi</a></li>
     </ul>
@@ -246,6 +331,45 @@
         </div>
     </div>
 </div>
+<footer class="footer">
+    <div class="containers">
+        <div class="row">
+            <div class="footer-col">
+                <h4>Giới thiệu chung</h4>
+                <ul>
+                    <li><a th:href>Về chúng tôi</a></li>
+                    <li><a th:href>Các dịch vụ</a></li>
+                    <li><a th:href>Chính sách hậu mãi</a></li>
+                    <li><a th:href>Chương trình thay thế</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trợ giúp</h4>
+                <ul>
+                    <li><a th:href>Các câu hỏi thường gặp</a></li>
+                    <li><a th:href>Địa chỉ liên lạc</a></li>
+                    <li><a th:href>Thư điện tử</a></li>
+                    <li><a th:href>Số fax và số điện thoại</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Dịch vụ trực tuyến</h4>
+                <ul>
+                    <li><a th:href>Các dịch vụ trực tuyến</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Theo dõi chúng tôi</h4>
+                <div class="social-link">
+                    <a href="#"><i class="fab fa-facebook-f"></i> </a>
+                    <a href="#"><i class="fab fa-twitter"></i> </a>
+                    <a href="#"><i class="fab fa-instagram"></i> </a>
+                    <a href="#"><i class="fab fa-linkedin"></i> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 <script>
     var li_links = document.querySelectorAll(".links ul li");
     var view_wraps = document.querySelectorAll(".view_wrap");
